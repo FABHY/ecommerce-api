@@ -13,6 +13,19 @@ router.get('/produtos', async (req, res) => {
     }
   });
   
+
+// Nova rota para filtrar produtos por categoria
+router.get('/produtos/categoria/:categoria', async (req, res) => {
+  try {
+      const produtos = await Produto.find({ categoria: req.params.categoria });
+      res.json(produtos);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+});
+
+
+  
   // Rota para obter um produto por ID
   router.get('/produtos/:id', async (req, res) => {
     try {
@@ -25,6 +38,8 @@ router.get('/produtos', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
+
+
   
   // Rota para criar um novo produto
   router.post('/produtos', async (req, res) => {
@@ -63,5 +78,12 @@ router.get('/produtos', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
+
+
+
+
+
+
+
   
   module.exports = router;
